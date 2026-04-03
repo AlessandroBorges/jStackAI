@@ -1,13 +1,13 @@
 package io.github.stackai.core.interfaces;
 
-import io.github.stackai.core.model.ChatMessage;
+import io.github.stackai.core.model.Chat;
 import io.github.stackai.core.model.LlmClientConfig;
-
-import java.util.List;
 
 public interface ILlmClient {
 
-    String ask(List<ChatMessage> messages, LlmClientConfig config);
+    String ask(Chat chat, LlmClientConfig config);
+
+    void ask(ResponseStream stream, Chat chat, LlmClientConfig config);
 
     float[] embed(String text, LlmClientConfig config);
 }

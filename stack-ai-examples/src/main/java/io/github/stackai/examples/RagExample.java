@@ -71,14 +71,15 @@ public class RagExample {
                 .map(Chunk::getText)
                 .collect(Collectors.joining("\n\n"));
 
-        String answer = llmClient.ask(
-                List.of(
+        Chat chat = Chat.builder()
+                .messages(List.of(
                         ChatMessage.system("Answer using only the context provided below."),
                         ChatMessage.system(context),
                         ChatMessage.user("What is the administrative appeal deadline?")
-                ),
-                clientConfig
-        );
+                ))
+                .build();
+
+        String answer = llmClient.ask(chat, clientConfig);
 
         System.out.println(answer);
 
