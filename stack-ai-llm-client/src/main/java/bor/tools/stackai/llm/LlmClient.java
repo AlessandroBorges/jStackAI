@@ -1,10 +1,11 @@
 package bor.tools.stackai.llm;
 
+
 import bor.tools.stackai.core.interfaces.ILlmClient;
 import bor.tools.stackai.core.model.ChatMessage;
-import bor.tools.stackai.core.model.LlmClientConfig;
+import bor.tools.stackai.core.model.*;
 
-import java.util.List;
+
 
 public class LlmClient implements ILlmClient {
 
@@ -15,7 +16,12 @@ public class LlmClient implements ILlmClient {
     }
 
     @Override
-    public String ask(List<ChatMessage> messages, LlmClientConfig config) {
+    public String ask(Chat chat, LlmClientConfig config) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public void ask(ResponseStream stream, Chat chat, LlmClientConfig config) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
