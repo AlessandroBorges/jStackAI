@@ -8,7 +8,7 @@
     <!-- ─────────────────────────────────────────────
          Coordenadas do parent
     ───────────────────────────────────────────────── -->
-    <groupId>io.github.stackai</groupId>
+    <groupId>bor.tools.stackai</groupId>
     <artifactId>stack-ai</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -84,22 +84,22 @@
 
             <!-- ── Módulos internos ─────────────────── -->
             <dependency>
-                <groupId>io.github.stackai</groupId>
+                <groupId>bor.tools.stackai</groupId>
                 <artifactId>stack-ai-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.stackai</groupId>
+                <groupId>bor.tools.stackai</groupId>
                 <artifactId>stack-ai-llm-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.stackai</groupId>
+                <groupId>bor.tools.stackai</groupId>
                 <artifactId>stack-ai-document-digest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.github.stackai</groupId>
+                <groupId>bor.tools.stackai</groupId>
                 <artifactId>stack-ai-rag</artifactId>
                 <version>${project.version}</version>
             </dependency>

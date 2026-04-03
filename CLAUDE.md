@@ -4,7 +4,7 @@
 
 **Stack AI** is a modular AI/LLM toolkit for the JVM. Philosophy: Apache Commons-style — pick only the modules you need, no framework required.
 
-- **GroupId:** `io.github.stackai`
+- **GroupId:** `bor.tools.stackai`
 - **Version:** `1.0.0-SNAPSHOT`
 - **Java:** 21 (minimum; required by Lucene 10.x)
 - **Build tool:** Maven 3.9.x
@@ -45,18 +45,18 @@ llm-client  digest-doc     rag ──────► digest-doc
 
 | Module | Package |
 |---|---|
-| `stack-ai-core` | `io.github.stackai.core.interfaces` / `io.github.stackai.core.model` |
-| `stack-ai-llm-client` | `io.github.stackai.llm` |
-| `stack-ai-document-digest` | `io.github.stackai.digest` / `io.github.stackai.digest.strategy` |
-| `stack-ai-rag` | `io.github.stackai.rag` |
-| `stack-ai-examples` | `io.github.stackai.examples` |
+| `stack-ai-core` | `bor.tools.stackai.core.interfaces` / `bor.tools.stackai.core.model` |
+| `stack-ai-llm-client` | `bor.tools.stackai.llm` |
+| `stack-ai-document-digest` | `bor.tools.stackai.digest` / `bor.tools.stackai.digest.strategy` |
+| `stack-ai-rag` | `bor.tools.stackai.rag` |
+| `stack-ai-examples` | `bor.tools.stackai.examples` |
 
 ---
 
 ## Core Interfaces (stack-ai-core)
 
 ```java
-// io.github.stackai.core.interfaces
+// bor.tools.stackai.core.interfaces
 ILlmClient       → ask(messages, LlmClientConfig)  / embed(text, LlmClientConfig)
 IDocumentDigest  → process(URI, DocumentDigestConfig) : List<Chunk>
 IRag             → index(URI, RagConfig) / search(query, n, RagConfig) / delete(docId, RagConfig)
