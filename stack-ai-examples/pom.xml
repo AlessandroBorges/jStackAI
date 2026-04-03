@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.stackai</groupId>
+        <artifactId>stack-ai</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>stack-ai-examples</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Stack AI — Examples</name>
+    <description>
+        Runnable demonstrations of composed Stack AI module usage.
+        Not published as a library artifact. Generates a fat JAR via
+        maven-assembly-plugin for easy local execution.
+    </description>
+
+    <dependencies>
+
+        <!-- Todos os módulos concretos — apenas aqui todos coexistem -->
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-llm-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-document-digest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-rag</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Teste -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!--
+                Fat JAR executável para rodar os exemplos localmente sem
+                configurar classpath manualmente.
+                Uso: mvn package -pl stack-ai-examples
+                     java -jar stack-ai-examples/target/stack-ai-examples-*-jar-with-dependencies.jar
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <!-- Altere para a classe main do exemplo desejado -->
+                            <mainClass>io.github.stackai.examples.RagExample</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

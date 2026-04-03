@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.stackai</groupId>
+        <artifactId>stack-ai</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>stack-ai-llm-client</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Stack AI — LLM Client</name>
+    <description>
+        Concrete implementation of ILlmClient. Compatible with the OpenAI API
+        and any provider that follows the same contract (Ollama, LM Studio,
+        Groq, etc.). Uses OkHttp for HTTP and Jackson for JSON serialization.
+        Does NOT depend on any other concrete Stack AI module.
+    </description>
+
+    <dependencies>
+
+        <!-- Contrato que este módulo implementa -->
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-core</artifactId>
+        </dependency>
+
+        <!-- Cliente HTTP para chamadas à API do LLM -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <!-- Serialização/deserialização dos payloads JSON (OpenAI format) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Utilitários de string e validação -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Teste -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

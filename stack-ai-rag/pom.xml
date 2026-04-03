@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.stackai</groupId>
+        <artifactId>stack-ai</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>stack-ai-rag</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Stack AI — RAG</name>
+    <description>
+        Document-oriented RAG engine based on Apache Lucene 10.x. Supports
+        textual, semantic (vector/HNSW) and hybrid search. Delegates all
+        document chunking to an IDocumentDigest instance injected via RagConfig.
+        Selects Lucene Analyzer dynamically per document based on Chunk.lang
+        (BrazilianAnalyzer, SpanishAnalyzer, EnglishAnalyzer, StandardAnalyzer).
+        Does NOT depend on stack-ai-llm-client; ILlmClient is injected via
+        RagConfig using the core interface.
+    </description>
+
+    <dependencies>
+
+        <!-- Contrato que este módulo implementa -->
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-core</artifactId>
+        </dependency>
+
+        <!--
+            Dependência direta em stack-ai-document-digest.
+            O Rag usa DocumentDigest, DocumentDigestConfig e DigestResult
+            internamente para delegar o chunking.
+            O consumidor injeta IDocumentDigest via RagConfig (interface do core),
+            de forma que qualquer implementação futura pode ser substituída.
+        -->
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-document-digest</artifactId>
+        </dependency>
+
+        <!-- ── Apache Lucene 10.x ──────────────────────────────────────── -->
+
+        <!-- IndexWriter, IndexSearcher, Document, Field, KnnFloatVectorField -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+        </dependency>
+
+        <!--
+            Analyzers de língua para seleção dinâmica por Chunk.lang:
+              pt_br  → BrazilianAnalyzer
+              es     → SpanishAnalyzer
+              en_us  → EnglishAnalyzer
+              outros → StandardAnalyzer (também neste módulo)
+        -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analysis-common</artifactId>
+        </dependency>
+
+        <!-- QueryParser para busca textual -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+        </dependency>
+
+        <!-- ── Apache Commons ──────────────────────────────────────────── -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Teste -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

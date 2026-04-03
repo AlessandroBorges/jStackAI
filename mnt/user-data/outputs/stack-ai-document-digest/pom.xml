@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.stackai</groupId>
+        <artifactId>stack-ai</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>stack-ai-document-digest</artifactId>
+    <packaging>jar</packaging>
+
+    <n>Stack AI — Document Digest</n>
+    <description>
+        Transforms raw documents (PDF, DOCX, HTML, TXT) into lists of Chunks
+        ready for indexing. Pipeline: Tika (XHTML extraction + language
+        detection) → JSoup (XHTML cleanup) → FlexMark (Markdown conversion)
+        → chunking strategy (Hierarchical, Normative, Fallback).
+        Does NOT depend on stack-ai-llm-client; ILlmClient is injected via
+        DocumentDigestConfig using the core interface.
+    </description>
+
+    <dependencies>
+
+        <!-- Contrato que este módulo implementa -->
+        <dependency>
+            <groupId>io.github.stackai</groupId>
+            <artifactId>stack-ai-core</artifactId>
+        </dependency>
+
+        <!-- ── Apache Tika (parsers seletivos) ────────────────────────── -->
+
+        <!-- API principal: AutoDetectParser, Metadata, ContentHandler -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+        </dependency>
+
+        <!-- Suporte a PDF (via Apache PDFBox, incluído como transitiva) -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parser-pdf-module</artifactId>
+        </dependency>
+
+        <!-- Suporte a DOCX, XLSX, PPTX (via Apache POI, incluído como transitiva) -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parser-microsoft-module</artifactId>
+        </dependency>
+
+        <!-- Suporte a HTML e XHTML -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parser-html-module</artifactId>
+        </dependency>
+
+        <!-- Suporte a TXT e Markdown raw -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parser-text-module</artifactId>
+        </dependency>
+
+        <!-- Detecção de língua via Optimaize (pt, es, en + fallback) -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-langdetect-optimaize</artifactId>
+        </dependency>
+
+        <!-- ── Pipeline XHTML → Markdown ──────────────────────────────── -->
+
+        <!-- Limpeza e normalização do XHTML produzido pelo Tika -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+
+        <!-- FlexMark core — parser e renderer de Markdown -->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark</artifactId>
+        </dependency>
+
+        <!-- Conversão XHTML → Markdown (etapa central do pipeline) -->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-html2md-converter</artifactId>
+        </dependency>
+
+        <!-- Extensão de tabelas para parse do AST Markdown nas strategies -->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-tables</artifactId>
+        </dependency>
+
+        <!-- ── Apache Commons ──────────────────────────────────────────── -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Teste -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
